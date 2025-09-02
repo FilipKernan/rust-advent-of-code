@@ -1,17 +1,19 @@
 
 use std::env;
 
+#[allow(dead_code)]
 mod day1;
+mod day2;
 
 fn main() {
 
     let args: Vec<String> = env::args().collect();
     let file_path =  &args[1];
-    let expect_vec = day1::load_file_to_sorted_vecs(file_path);
-
-    match expect_vec {
-        Some((vec_1, vec_2)) => {day1::process_vecs(&vec_1, &vec_2); day1::calculate_sim(&vec_1, &vec_2);},
-        None => print!("Failed to load files")
+    if let Ok(lines) = day2::to_lines(file_path){
+        print!("Number of valid reports {} ", day2::parse_reports(lines));
+    }
+    else {
+        print!("Could not read file");
     }
 }
 
